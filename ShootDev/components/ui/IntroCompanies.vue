@@ -1,0 +1,24 @@
+<template>
+  <div class="flex grid-column">
+    <img
+      src="../../assets/pictures/mainpage/companies/gungle.png"
+      alt="gungle"
+      class="w-48"
+    />
+    <img
+      src="../../assets/pictures/mainpage/companies/moshimoshi.png"
+      alt="moshi"
+      class="w-48"
+    />
+    <img
+      src="../../assets/pictures/mainpage/companies/largehard.png"
+      alt="largehard"
+      class="w-48"
+    />
+    <img
+      src="../../assets/pictures/mainpage/companies/stroop.png"
+      alt="stroop"
+      class="w-48"
+    />
+  </div>
+</template>

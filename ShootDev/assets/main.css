@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --font-marko: "Marko One", "sans-serif";
+  --font-opensans: "Open Sans", "sans-serif";
+  --font-robotto: "Robotto", "sans-serif";
+  --font-muli: "Muli", "sans-serif";
+  --font-cutive: "Cutive Mono", "sans-serif";
+  --font-lora: "Lora", "sans-serif";
+  --font-mont: "Montserrat", "sans-serif";
+  --font-dmsans: "DM Sans", "sans-serif";
+}
