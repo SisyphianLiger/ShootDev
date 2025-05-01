@@ -34,3 +34,5 @@ This chapter had me dive deep into grid, flex, and props and emitters, which I f
 
 Anyways, I think its better off to just show you the current state of the project so...without further ado!
 
+![output](https://github.com/user-attachments/assets/263ba249-f3f7-49d9-adc7-b52bed6b6e72)
+
