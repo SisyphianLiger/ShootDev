@@ -1,40 +1,59 @@
-<script setup lang="ts">
-import * as v from "valibot";
-import type { FormSubmitEvent } from "@nuxt/ui";
-import type { FormType } from "../types/FormTypes";
+<script setup lang="ts">import * as v from "valibot";
 
-const emailForm = v.object({
-  email: v.pipe(v.string(), v.email("Invalid Email")),
-  password: v.pipe(
-    v.string(),
-    v.minLength(8, "Must Be Longer than 8 Characters"),
-  ),
+import type { FormSubmitEvent }
+
+from "@nuxt/ui";
+
+import type { FormType }
+
+from "../types/FormTypes";
+
+const {	data } = await useFetch('/api/data') 
+const emailForm=
+v.object({
+	email: v.pipe(v.string(), v.email("Invalid Email")),
+	password: v.pipe(v.string(), v.minLength(8, "Must Be Longer than 8 Characters")),
 });
 
-type EmailForm = v.InferOutput<typeof emailForm>;
+type EmailForm=v.InferOutput<typeof emailForm>;
 
-const emailState = reactive({
-  email: "",
-  password: "",
+const emailState=reactive({
+	email: "",
+	password: "",
 });
 
-const toast = useToast();
+const toast=useToast();
+
 function onSetLogIn(newForm: FormType) {
-  emits("setFormState", newForm);
+	emits("setFormState", newForm);
 }
+
 
 async function onSubmit(event: FormSubmitEvent<EmailForm>) {
-  toast.add({
-    title: "Success",
-    description: "The form has been submitted.",
-    color: "success",
-  });
-  console.log(event.data);
+	toast.add({
+		title: "Success",
+		description: "The form has been submitted.",
+		color: "success",
+	});
+console.log(event.data);
 }
 
-const emits = defineEmits<{
-  setFormState: [formState: FormType];
-}>();
+async function handleOverTheWireLogin() {
+	const res=await $fetch('http://localhost:8080/overthewire', {
+
+		method: 'POST',
+		body: {
+			data: "Hello There"
+		}
+	});
+	console.log(res);
+}
+
+const emits=defineEmits < {
+	setFormState: [formState: FormType];
+}
+
+>();
 </script>
 
 <template>
@@ -60,10 +79,10 @@ const emits = defineEmits<{
           @submit="onSubmit"
         >
           <UFormField 
-	   :ui="{ error: 'text-red-500 font-semibold text-sm pt-1' }"
-	  class="w-full h-30 font-marko text-[20px]" label="Email" name="email" >
+   :ui="{ error: 'text-red-500 font-semibold text-sm pt-1' }"
+  class="w-full h-30 font-marko text-[20px]" label="Email" name="email" >
             <UInput
-	    size="lg"
+    size="lg"
               class="w-full min-h-[45px] border border-yellow-500 shadow-md shadow-yellow-800 text-white placeholder-gray-400"
               v-model="emailState.email"
               type="email"
@@ -71,23 +90,24 @@ const emits = defineEmits<{
           </UFormField>
 
           <UFormField 
-	   :ui="{ error: 'text-red-500 font-semibold text-sm pt-1' }"
-	  class="w-full h-30 font-marko text-[20px]" label="Password" name="password" >
+   :ui="{ error: 'text-red-500 font-semibold text-sm pt-1' }"
+  class="w-full h-30 font-marko text-[20px]" label="Password" name="password" >
             <UInput
-	    size="lg"
+    size="lg"
               class="w-full min-h-[45px] border border-yellow-500 shadow-md shadow-yellow-800 text-white placeholder-gray-400"
               v-model="emailState.password"
               type="password"
             />
           </UFormField>
           <div class="pt-3 flex justify-center ">
-	    <button class="border text-[#c0c4c7] rounded-full w-40 h-12 border-yellow-500 shadow-md shadow-yellow-800 bg-yellow-900 hover:bg-yellow-800 transition-colors duration-200">
-	     Log In 
-	    </button>
+
+    <button class="border text-[#c0c4c7] rounded-full w-40 h-12 border-yellow-500 shadow-md shadow-yellow-800 bg-yellow-900 hover:bg-yellow-800 transition-colors duration-200" @click=handleOverTheWireLogin>
+     Log In 
+    </button>
+
           </div>
         </UForm>
       </div>
     </div>
   </div>
 </template>
-

@@ -1,0 +1,2 @@
+
+curl -v -X POST http://localhost:8080/overthewire -H "Content-Type: application/json" -d '{"data": "test message"}'
