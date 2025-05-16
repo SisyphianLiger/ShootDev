@@ -1,9 +1,12 @@
 package main
 
 import (
-	"github.com/SisyphianLiger/Shootdev/api"
+	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/SisyphianLiger/Shootdev/api"
+	"github.com/SisyphianLiger/Shootdev/utils"
 )
 
 const filepathRoot = "./app"
@@ -15,6 +18,15 @@ func main() {
 		FileServerHits: 0,
 		Jwt:            "Not Serviceable",
 	}
+
+	utils.OpenEnv()
+	dbURL := utils.EnvironmentVarExists("DB_URL") // DB URL
+	// devEnv := utils.EnvironmentVarExists("PLATFORM")      // Dev or Prod
+	// jwtSecret := utils.EnvironmentVarExists("JWT_SECRET") // JWT
+
+	// Make DB Connection extracted
+	_ = utils.OpenDB("postgres", dbURL)
+	fmt.Print("Made it here?\n")
 
 	s := api.CreateNewServer()
 	s.MountMiddleware(apiCfg)
